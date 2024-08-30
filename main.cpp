@@ -4,8 +4,8 @@
 
 // Declaration and assignment of the main window
 // and the main renderer
-SDL_Window* mainWindow = nullptr;
-SDL_Renderer* mainRenderer = nullptr;
+SDL_Window* mainWindow = NULL;
+SDL_Renderer* mainRenderer = NULL;
 
 // This will be the main color of the window
 Color3 windowColor = {255, 255, 255 ,255};

@@ -14,7 +14,5 @@ void createWindow(int height, int width, bool isFullScreen, const char* title, S
 void renderWindow(SDL_Renderer* renderer, Color3 color);
 // Called on program exit
 void onQuit(SDL_Window* window, SDL_Renderer* renderer);
-// Used to toggle fullscreen
-void toggleFullScreen(SDL_Window* window);
 
 #endif /* WINDOW_H */

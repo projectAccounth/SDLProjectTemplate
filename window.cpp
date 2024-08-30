@@ -31,23 +31,6 @@ void createWindow(int height, int width, bool isFullScreen, const char* title, S
 	}
 }
 
-void toggleFullScreen(SDL_Window* targetWindow) {
-	// Use the bitwise AND to check whether FULLSCREEN is
-	// one in the current flags of the window
-	bool isFullScreen = SDL_GetWindowFlags(targetWindow) & SDL_WINDOW_FULLSCREEN;
-	std::cout << isFullScreen << '\n' << SDL_GetWindowFlags(targetWindow) << "\n";
-	// Use the ternary operator (replacing if-else) to toggle fullscreen
-	if (isFullScreen == 0) {
-		SDL_SetWindowFullscreen(targetWindow, SDL_WINDOW_FULLSCREEN);
-		std::cout << SDL_GetError() << '\n';
-	}
-	else {
-		SDL_SetWindowFullscreen(targetWindow, 0);
-		std::cout << SDL_GetError() << '\n';
-	}
-}
-
-
 // The function responsible for render whatever that is supposed to be rendered
 void renderWindow(SDL_Renderer *renderer, Color3 color) {
 	// Set a color for the renderer

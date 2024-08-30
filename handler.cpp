@@ -4,9 +4,9 @@
 void programControls() {
 	// Getting keyboardState
 	const Uint8* keyState = SDL_GetKeyboardState(nullptr);	
-	// If the F11 key is pressed, toggle fullscreen
-	if (keyState[SDL_SCANCODE_F11]) {
-		toggleFullScreen(mainWindow);
+	// If the A key is pressed, log "A" to stdout
+	if (keyState[SDL_SCANCODE_A]) {
+		std::cout << "A" << '\n';
 	}
 }
 

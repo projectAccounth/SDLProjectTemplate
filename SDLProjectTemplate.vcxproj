@@ -172,6 +172,7 @@
     <PostBuildEvent>
       <Command>xcopy /y "$(SDLLIBS64)\*.dll" "$(TargetDir)" </Command>
     </PostBuildEvent>
+    <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="handler.cpp" />
