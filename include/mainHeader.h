@@ -11,24 +11,12 @@
 // Includes for the program
 
 #include <SDL.h>
-
 #include <SDL_image.h>
-
 #include <SDL_ttf.h>
 
 #include <iostream>
+#include <cstdlib>
 
-// Include all files in order not to pollute the source files with includes
-
-#include "Color3.h"
-
-#include "handler.h"
-
-#include "window.h"
-
-// External symbol for mainWindow and mainRenderer
-// in case you need to call it outside main.cpp
-extern SDL_Window* mainWindow;
-extern SDL_Renderer* mainRenderer;
+#include "program.h"
 
 #endif /* MAIN_HDR_H */

@@ -76,21 +76,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
+    <LibraryPath>./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
+    <LibraryPath>./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(SDLLIBS32);$(LibraryPath)</LibraryPath>
+    <IncludePath>./dependencies/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
+    <LibraryPath>$(SDLLIBS32);$(LibraryPath);./dependencies/SDL2/lib/x86</LibraryPath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(SDLLIBS32);$(LibraryPath)</LibraryPath>
+    <IncludePath>./dependencies/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
+    <LibraryPath>$(SDLLIBS32);$(LibraryPath);./dependencies/SDL2/lib/x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SDLINCLUDES)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SDLINCLUDES);./dependencies/SDL2/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SDLINCLUDES)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SDLINCLUDES);./dependencies/SDL2/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SDLINCLUDES)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./dependencies/SDL2/include;$(SDLINCLUDES)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -156,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SDLINCLUDES)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SDLINCLUDES);./dependencies/SDL2/include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -175,15 +176,12 @@
     <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="handler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="window.cpp" />
+    <ClCompile Include="program.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Color3.h" />
-    <ClInclude Include="include\handler.h" />
     <ClInclude Include="include\mainHeader.h" />
-    <ClInclude Include="include\window.h" />
+    <ClInclude Include="include\program.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
