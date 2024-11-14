@@ -16,6 +16,13 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <cstring>
+#include <cstdlib>
+#include <vector>
+#include <functional>
+#include <variant>
+#include <type_traits>
 
 #include "program.h"
 

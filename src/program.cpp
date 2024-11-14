@@ -8,8 +8,6 @@ SDL_Renderer* Program::createRenderer(SDL_Window *targetWindow) {
 }
 
 SDL_Window* Program::createWindow(int height, int width, bool isFullScreen, const char* title) {
-	// Initialize the program
-	SDL_Init(SDL_INIT_EVERYTHING);
 	// Create a window with the name of the passed argument title,
 	// with the width and height of the passed arguments
 	// and the window position at the center of the screen
