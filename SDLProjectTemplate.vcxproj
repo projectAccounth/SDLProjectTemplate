@@ -180,12 +180,19 @@
     <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\button.h" />
+    <ClInclude Include="include\buttonManager.h" />
     <ClInclude Include="include\mainHeader.h" />
     <ClInclude Include="include\program.h" />
+    <ClInclude Include="include\textBox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\buttonManager.cpp" />
+    <ClCompile Include="src\imageButton.cpp" />
+    <ClCompile Include="src\textButton.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\program.cpp" />
+    <ClCompile Include="src\textBox.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,10 @@ int main(int argc, char* argv[]) {
 
 	Program program;
 
+	// Initialize the program
+	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
+
 	// This will create a window with a title of "Program",
 	// with a size of WINDOW_WIDTH and
 	// WINDOW_HEIGHT, which can be later edited in mainHeader.h
