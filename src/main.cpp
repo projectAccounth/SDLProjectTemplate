@@ -1,6 +1,6 @@
 // C++ SDL2 Template for Visual Studio 2022
 
-#include "./include/mainHeader.h"
+#include "../include/mainHeader.h"
 
 // Declaration and assignment of the main window
 // and the main renderer

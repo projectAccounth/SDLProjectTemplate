@@ -1,5 +1,5 @@
-#include "./include/program.h"
-#include "./include/mainHeader.h"
+#include "../include/program.h"
+#include "../include/mainHeader.h"
 
 // Definition of the createRenderer() function
 SDL_Renderer* Program::createRenderer(SDL_Window *targetWindow) {
