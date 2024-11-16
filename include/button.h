@@ -5,12 +5,6 @@
 
 #include "mainHeader.h"
 
-enum textAlign {
-    LEFT,
-    CENTER,
-    RIGHT
-};
-
 class textButton {
 private:
 
@@ -26,7 +20,7 @@ public:
     TTF_Font* textFont; // font for the text in the textButton
     const char* text; // text for the textButton
 
-    textAlign TextAlign;
+    textAlign xAlign, yAlign;
 
     bool hovered;
     bool visible, active;
@@ -34,14 +28,15 @@ public:
 
     textButton(int x, int y, int w, int h,
         SDL_Color c, const char* t,
-        SDL_Color tc, TTF_Font* f,
-        textAlign align, SDL_Color hc)
+        SDL_Color tc, SDL_Color hc, TTF_Font* f,
+        textAlign alignX, textAlign alignY)
         : buttonRect{ x, y, w, h },
         buttonColor(c),
         textColor(tc),
         textFont(f),
         text(t),
-        TextAlign(align),
+        xAlign(alignX),
+        yAlign(alignY),
         textTexture(nullptr),
         hovered(false),
         hoverColor(hc),
@@ -73,25 +68,28 @@ public:
 
 class imageButton {
 private:
-
+    SDL_Texture* buttonTexture;
+    SDL_Texture* hoverTexture; // texture for hovering, set hoverTexture to buttonTexture if you don't want hover.
 public:
     // dimension, size, position and initial RGB color for the button
     SDL_Rect buttonRect;
        
-    SDL_Texture* buttonTexture;
-    SDL_Texture* hoverTexture; // texture for hovering, set hoverTexture to buttonTexture if you don't want hover.
-
     bool hovered;
     bool visible, active;
     std::function<void()> buttonAction;
+    const char* defaultImgPath;
+    const char* hoverImgPath;
 
-    imageButton(int x, int y, int w, int h, SDL_Texture *is, SDL_Texture* ht)
+    imageButton(int x, int y, int w, int h, std::string defaultImageFilePath, std::string hoverImageFilePath)
         : buttonRect{ x, y, w, h },
         hovered(false),
-        hoverTexture(ht),
+        buttonTexture(NULL),
+        hoverTexture(NULL),
         visible(true),
-        active(true) {}
-    /* you don't have to care much about these, this is just the constructor for the class */
+        active(true),
+        defaultImgPath(defaultImageFilePath.c_str()),
+        hoverImgPath(hoverImageFilePath.c_str())
+        {}
 
     void render(SDL_Renderer* renderer);
 
