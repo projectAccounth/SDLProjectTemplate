@@ -70,7 +70,7 @@ void imageButton::handleEvents(SDL_Event& e) {
         }
 
         // if mouse is clicked while hovering, those couts are safe to remove
-        if (e.type == SDL_MOUSEBUTTONDOWN && hovered && active) {
+        if (e.type == SDL_MOUSEBUTTONDOWN && hovered) {
             if (buttonAction) {
                 std::cout << "Button clicked!" << std::endl;
                 buttonAction();

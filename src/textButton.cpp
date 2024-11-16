@@ -25,7 +25,8 @@ void textButton::render(SDL_Renderer* renderer) {
         return;
     }
     // set the color to draw for the button and also set the settings to render the button
-    SDL_Color drawColor = hovered ? hoverColor : buttonColor; // using the barely-readable ternary operator to specify the color of the button
+    SDL_Color drawColor = hovered ? hoverColor : buttonColor;
+    // the color of the button will be the color of the hovered button when disabled (by default)
     if (!active) {
         drawColor = hoverColor;
     }
@@ -109,7 +110,7 @@ void textButton::handleEvents(SDL_Event& e) {
         else {
             hovered = false;
         }
-        if (e.type == SDL_MOUSEBUTTONDOWN && hovered && active) {
+        if (e.type == SDL_MOUSEBUTTONDOWN && hovered) {
             if (buttonAction) {
                 std::cout << "Button clicked!" << std::endl;
                 buttonAction();
