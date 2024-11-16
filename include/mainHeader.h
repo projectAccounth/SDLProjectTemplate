@@ -26,4 +26,11 @@
 
 #include "program.h"
 
+
+enum textAlign {
+    LEFT,
+    CENTER,
+    RIGHT
+};
+
 #endif /* MAIN_HDR_H */

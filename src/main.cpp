@@ -1,17 +1,17 @@
 // C++ SDL2 Template for Visual Studio 2022
 
 #include "../include/mainHeader.h"
+#include "../include/button.h"
+#include "../include/textBox.h"
+#include "../include/buttonManager.h"
 
-// Declaration and assignment of the main window
-// and the main renderer
+// initialization
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
 
-// This will be the main color of the window
+// window's color, change please
 SDL_Color windowColor = {255, 255, 255 ,255};
 
-
-// The main function, the entry point function of the program
 int main(int argc, char* argv[]) {
 
 	Program program;
@@ -20,9 +20,11 @@ int main(int argc, char* argv[]) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	TTF_Init();
 
-	// This will create a window with a title of "Program",
-	// with a size of WINDOW_WIDTH and
-	// WINDOW_HEIGHT, which can be later edited in mainHeader.h
+	/*
+		Things like font creation go here
+	*/
+
+	// Creating a 640x480 window (at least with the default template setting)
 	mainWindow = program.createWindow(WINDOW_HEIGHT, WINDOW_WIDTH, 0, "Program");
 
 	mainRenderer = program.createRenderer(mainWindow);
@@ -34,9 +36,16 @@ int main(int argc, char* argv[]) {
 		// processEvent() is a boolean function which will return the value
 		// of isRunning indicating whether the program is running or not
 		isRunning = program.processEvent();
-		// This is the function which is responsible for
-		// rendering the objects on window
-		program.renderWindow(mainRenderer, windowColor);
+
+		// Set a color for the renderer
+		SDL_SetRenderDrawColor(mainRenderer, windowColor.r, windowColor.g, windowColor.b, windowColor.a);
+		// Clear the renderer
+		SDL_RenderClear(mainRenderer);
+
+		// Things that need to be rendered go here
+
+		// Make the renderer present
+		SDL_RenderPresent(mainRenderer);
 	}
 	// This function is called on program exit
 	program.onQuit(mainWindow, mainRenderer);
