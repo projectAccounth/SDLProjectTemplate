@@ -5,11 +5,33 @@ void imageButton::render(SDL_Renderer* renderer) {
     if (!isVisible()) {
         return;
     }
+
+    SDL_Surface* imgSurf = IMG_Load(defaultImgPath);
+    SDL_Surface* hoverSurf = IMG_Load(hoverImgPath);
+
+    if (imgSurf == nullptr || hoverSurf == nullptr) {
+        std::cout << "A problem occurred when creating one or more surface for image button. Error: " << SDL_GetError() << '\n';
+        return;
+    }
+
+    hoverTexture = SDL_CreateTextureFromSurface(renderer, hoverSurf);
+    buttonTexture = SDL_CreateTextureFromSurface(renderer, imgSurf);
+
+    if (hoverTexture == nullptr || buttonTexture == nullptr) {
+        std::cout << "A problem occurred when creating one or more texture for image button. Error: " << SDL_GetError() << '\n';
+        return;
+    }
+
     SDL_Texture* finalTexture = hovered ? hoverTexture : buttonTexture;
 
     SDL_RenderCopy(renderer, finalTexture, nullptr, &buttonRect);
 
     SDL_DestroyTexture(finalTexture);
+    SDL_DestroyTexture(hoverTexture);
+    SDL_DestroyTexture(buttonTexture);
+
+    SDL_FreeSurface(hoverSurf);
+    SDL_FreeSurface(imgSurf);
 }
 
 void imageButton::setAction(std::function<void()> actionFunction) {
@@ -47,7 +69,7 @@ void imageButton::handleEvents(SDL_Event& e) {
             hovered = false;
         }
 
-        // If mouse is clicked while hovering
+        // if mouse is clicked while hovering, those couts are safe to remove
         if (e.type == SDL_MOUSEBUTTONDOWN && hovered && active) {
             if (buttonAction) {
                 std::cout << "Button clicked!" << std::endl;

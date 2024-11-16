@@ -46,19 +46,32 @@ void textButton::render(SDL_Renderer* renderer) {
         SDL_Rect textRect;
 
         // align the text
-        //textRect = { buttonRect.x + (buttonRect.w - textWidth) / 2, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
-        switch (TextAlign) {
+        switch (xAlign) {
         case LEFT:
-            textRect = { buttonRect.x + 5, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + 5;
             break;
         case CENTER:
-            textRect = { buttonRect.x + (buttonRect.w - textWidth) / 2, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + (buttonRect.w - textWidth) / 2;
             break;
         case RIGHT:
-            textRect = { buttonRect.x + buttonRect.w - textWidth - 5, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + (buttonRect.w - textWidth) - 5;
             break;
         }
-        // std::cout << textRect.x << " " << textRect.y << " "<< textRect.w << " "<< textRect.h << " " << "\n";
+        // LEFT = up, CENTER = center; RIGHT = down.
+        switch (yAlign) {
+        case LEFT:
+            textRect.y = buttonRect.y + 5;
+            break;
+        case CENTER:
+            textRect.y = buttonRect.y + (buttonRect.h - textHeight) / 2;
+            break;
+        case RIGHT:
+            textRect.y = buttonRect.y + (buttonRect.h - textHeight) - 5;
+            break;
+        }
+
+        textRect.w = textWidth; textRect.h = textHeight;
+
         SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
     }
 }
