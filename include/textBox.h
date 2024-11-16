@@ -11,20 +11,32 @@ private:
     SDL_Surface* textSurface;
     SDL_Texture* textTexture;
     bool visible;
-public:
+    textAlign xAlign;
+    textAlign yAlign;
 
+    std::vector<std::string> lines;
+
+    int lineHeight() const;
+
+    std::vector<std::string> splitTextIntoLines(std::string &text, int maxWidth);
+
+public:
     SDL_Rect textBoxRect;
     SDL_Color boxColor;
     std::string text;
 
     SDL_Color textColor;
-    textBox(SDL_Rect br, SDL_Color bc, std::string t, SDL_Color tc, TTF_Font* tf) :
+    textBox(SDL_Rect br, SDL_Color bc, std::string t,
+            SDL_Color tc, TTF_Font* tf,
+            textAlign alignX, textAlign alignY) :
         textBoxRect(br),
         boxColor(bc),
         text(t),
         textColor(tc),
         textFont(tf),
-        visible(true) {}
+        visible(true),
+        xAlign(alignX),
+        yAlign(alignY) {}
 
     void render(SDL_Renderer* renderer);
 

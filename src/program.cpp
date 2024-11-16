@@ -30,18 +30,6 @@ SDL_Window* Program::createWindow(int height, int width, bool isFullScreen, cons
 	return targetWindow;
 }
 
-// The function responsible for render whatever that is supposed to be rendered
-void Program::renderWindow(SDL_Renderer *renderer, SDL_Color color) {
-	// Set a color for the renderer
-	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-	// Clear the renderer
-	SDL_RenderClear(renderer);
-
-	// Things that need to be rendered go here
-
-	// Make the renderer present
-	SDL_RenderPresent(renderer);
-}
 
 void Program::onQuit(SDL_Window *window, SDL_Renderer *renderer) {
 	// Destroy window and renderer

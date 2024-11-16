@@ -25,7 +25,8 @@ void textButton::render(SDL_Renderer* renderer) {
         return;
     }
     // set the color to draw for the button and also set the settings to render the button
-    SDL_Color drawColor = hovered ? hoverColor : buttonColor; // using the barely-readable ternary operator to specify the color of the button
+    SDL_Color drawColor = hovered ? hoverColor : buttonColor;
+    // the color of the button will be the color of the hovered button when disabled (by default)
     if (!active) {
         drawColor = hoverColor;
     }
@@ -46,19 +47,32 @@ void textButton::render(SDL_Renderer* renderer) {
         SDL_Rect textRect;
 
         // align the text
-        //textRect = { buttonRect.x + (buttonRect.w - textWidth) / 2, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
-        switch (TextAlign) {
+        switch (xAlign) {
         case LEFT:
-            textRect = { buttonRect.x + 5, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + 5;
             break;
         case CENTER:
-            textRect = { buttonRect.x + (buttonRect.w - textWidth) / 2, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + (buttonRect.w - textWidth) / 2;
             break;
         case RIGHT:
-            textRect = { buttonRect.x + buttonRect.w - textWidth - 5, buttonRect.y + (buttonRect.h - textHeight) / 2, textWidth, textHeight };
+            textRect.x = buttonRect.x + (buttonRect.w - textWidth) - 5;
             break;
         }
-        // std::cout << textRect.x << " " << textRect.y << " "<< textRect.w << " "<< textRect.h << " " << "\n";
+        // LEFT = up, CENTER = center; RIGHT = down.
+        switch (yAlign) {
+        case LEFT:
+            textRect.y = buttonRect.y + 5;
+            break;
+        case CENTER:
+            textRect.y = buttonRect.y + (buttonRect.h - textHeight) / 2;
+            break;
+        case RIGHT:
+            textRect.y = buttonRect.y + (buttonRect.h - textHeight) - 5;
+            break;
+        }
+
+        textRect.w = textWidth; textRect.h = textHeight;
+
         SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
     }
 }
@@ -96,7 +110,7 @@ void textButton::handleEvents(SDL_Event& e) {
         else {
             hovered = false;
         }
-        if (e.type == SDL_MOUSEBUTTONDOWN && hovered && active) {
+        if (e.type == SDL_MOUSEBUTTONDOWN && hovered) {
             if (buttonAction) {
                 std::cout << "Button clicked!" << std::endl;
                 buttonAction();
