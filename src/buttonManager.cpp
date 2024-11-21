@@ -4,10 +4,6 @@ void buttonManager::add(buttonType btn) {
 	buttons.push_back(btn);
 }
 
-void buttonManager::remove(buttonType* btn) {
-	// TODO: implement button removal
-}
-
 void buttonManager::renderAll(SDL_Renderer *renderer) {
 	for (auto& button : buttons) {
 		std::visit([&](auto& btn) { btn.render(renderer); }, button);

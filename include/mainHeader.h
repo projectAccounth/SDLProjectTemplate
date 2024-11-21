@@ -24,9 +24,6 @@
 #include <variant>
 #include <type_traits>
 
-#include "program.h"
-
-
 enum textAlign {
     LEFT,
     CENTER,

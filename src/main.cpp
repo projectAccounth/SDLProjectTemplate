@@ -4,8 +4,8 @@
 #include "../include/button.h"
 #include "../include/textBox.h"
 #include "../include/buttonManager.h"
+#include "../include/program.h"
 
-// initialization
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
 
@@ -16,7 +16,6 @@ int main(int argc, char* argv[]) {
 
 	Program program;
 
-	// Initialize the program
 	SDL_Init(SDL_INIT_EVERYTHING);
 	TTF_Init();
 
@@ -28,26 +27,25 @@ int main(int argc, char* argv[]) {
 	mainWindow = program.createWindow(WINDOW_HEIGHT, WINDOW_WIDTH, 0, "Program");
 
 	mainRenderer = program.createRenderer(mainWindow);
-	
-	// The boolean that indicates whether the program is running or not
+
 	bool isRunning = true;
 
 	while (isRunning) {
-		// processEvent() is a boolean function which will return the value
-		// of isRunning indicating whether the program is running or not
-		isRunning = program.processEvent();
+		SDL_Event e;
+		while (SDL_PollEvent(&e)) {
+			isRunning = program.processEvent(e);
 
-		// Set a color for the renderer
+			// button events, etc. go here
+
+		}
+		
 		SDL_SetRenderDrawColor(mainRenderer, windowColor.r, windowColor.g, windowColor.b, windowColor.a);
-		// Clear the renderer
 		SDL_RenderClear(mainRenderer);
 
 		// Things that need to be rendered go here
 
-		// Make the renderer present
 		SDL_RenderPresent(mainRenderer);
 	}
-	// This function is called on program exit
 	program.onQuit(mainWindow, mainRenderer);
 
 	return 0;

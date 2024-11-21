@@ -14,8 +14,6 @@ public:
 
 	void add(buttonType btn);
 
-	void remove(buttonType *btn);
-
 	void renderAll(SDL_Renderer *renderer);
 
 	void handleAllEvent(SDL_Event e);
