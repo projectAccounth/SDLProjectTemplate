@@ -1,53 +1,6 @@
 #include "../include/textBox.h"
 
-int textBox::lineHeight() const {
-    int fontHeight = TTF_FontHeight(textFont);
-    return fontHeight;
-}
-
-std::vector<std::string> textBox::splitTextIntoLines(std::string& text, int maxWidth) {
-    std::vector<std::string> outLines;
-    std::string currentLine;
-    std::string word;
-    int lineWidth = 0;
-
-    for (char c : text) {
-        if (c == ' ' || c == '\n') {
-            // line measurement
-            int wordWidth = 0, wordHeight = 0;
-            TTF_SizeText(textFont, (currentLine + word).c_str(), &wordWidth, &wordHeight);
-
-            if (wordWidth > maxWidth) {
-                // wrap the text
-                outLines.push_back(currentLine);
-                currentLine = word;
-            }
-            else {
-                currentLine += word;
-            }
-
-            if (c == '\n') {
-                outLines.push_back(currentLine);
-                currentLine.clear();
-            }
-            else {
-                currentLine += ' ';
-            }
-            word.clear();
-        }
-        else {
-            word += c;
-        }
-    }
-
-    // last line!!
-    if (!currentLine.empty() || !word.empty()) {
-        outLines.push_back(currentLine + word);
-    }
-    return outLines;
-}
-
-void textBox::render(SDL_Renderer* renderer) {
+void editableTextBox::render(SDL_Renderer* renderer) {
     int padding = 5;
     int maxWidth = textBoxRect.w - padding * 2;
 
@@ -65,7 +18,7 @@ void textBox::render(SDL_Renderer* renderer) {
     if (text.empty()) {
         return;
     }
-    
+
     lines = splitTextIntoLines(text, maxWidth);
 
     // LEFT = up, CENTER = center; RIGHT = down.
@@ -83,6 +36,18 @@ void textBox::render(SDL_Renderer* renderer) {
 
     int offsetY = 0;
 
+    switch (yAlign) {
+    case LEFT:
+        startY = textBoxRect.y + padding;
+        break;
+    case CENTER:
+        startY = textBoxRect.y + (textBoxRect.h - totalHeight) / 2;
+        break;
+    case RIGHT:
+        startY = textBoxRect.y + (textBoxRect.h - totalHeight) - padding;
+        break;
+    }
+
     for (const auto& line : lines) {
         int textWidth = 0, textHeight = 0;
         TTF_SizeText(textFont, line.c_str(), &textWidth, &textHeight);
@@ -99,7 +64,8 @@ void textBox::render(SDL_Renderer* renderer) {
             startX = textBoxRect.x + maxWidth - textWidth - padding;
             break;
         }
-        SDL_Surface* textSurface = TTF_RenderUTF8_Blended(textFont, line.c_str(), textColor);
+
+        SDL_Surface* textSurface = TTF_RenderText_Blended(textFont, line.c_str(), textColor);
         if (!textSurface) continue;
 
         SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
@@ -112,15 +78,54 @@ void textBox::render(SDL_Renderer* renderer) {
     }
 }
 
-void textBox::update(SDL_Renderer* renderer, const char* textToUpdate) {
-    text = textToUpdate;
-    render(renderer);
+void editableTextBox::handleEvent(const SDL_Event& e) {
+    if (!editable) return;
+    if (e.type == SDL_KEYDOWN) {
+        auto it = keyActions.find(e.key.keysym.sym);
+        if (it != keyActions.end()) {
+            it->second(); // Call the corresponding action
+        }
+    }
+    else if (e.type == SDL_TEXTINPUT) {
+        insertCharacter(e.text.text[0]); // Insert the input character
+    }
 }
 
-bool textBox::isVisible() const {
-    return visible;
+void editableTextBox::handleBackspace() {
+    if (cursorPosition > 0) {
+        text.erase(cursorPosition - 1, 1);
+        cursorPosition--;
+    }
 }
 
-void textBox::toggleVisibility(bool value) {
-    visible = value;
+void editableTextBox::handleDelete() {
+    if (cursorPosition < text.size()) {
+        text.erase(cursorPosition, 1);
+    }
+}
+
+void editableTextBox::moveCursorLeft() {
+    if (cursorPosition > 0) {
+        cursorPosition--;
+    }
+}
+
+void editableTextBox::moveCursorRight() {
+    if (cursorPosition < text.size()) {
+        cursorPosition++;
+    }
+}
+
+void editableTextBox::insertCharacter(char c) {
+    text.insert(cursorPosition, 1, c);
+    cursorPosition++;
+}
+
+std::string editableTextBox::getText() const {
+    return text;
+}
+
+void editableTextBox::reset() {
+    text.clear();
+    cursorPosition = 0;
 }
