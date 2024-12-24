@@ -1,11 +1,13 @@
 #include "../include/button.h"
 #include "../include/mainHeader.h"
 
+int textButton::nextId = 0;
+
 void textButton::loadText(SDL_Renderer* renderer) {
     if (textTexture != nullptr)
         SDL_DestroyTexture(textTexture); // destroy the texture to create a new one
 
-    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(textFont, text, textColor);
+    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(textFont, text.c_str(), textColor);
     if (textSurface == nullptr) {
         std::cerr << "Cannot create surface for text, error:" << TTF_GetError() << "\n";
         return;
@@ -81,6 +83,10 @@ void textButton::setAction(std::function<void()> actionFunction) {
     buttonAction = actionFunction;
 }
 
+void textButton::setHoverAction(std::function<void()> actionFunction) {
+    hoverAction = actionFunction;
+}
+
 bool textButton::isClicked(int x, int y) {
     return (x > buttonRect.x &&
         x < (buttonRect.x + buttonRect.w) &&
@@ -102,10 +108,13 @@ void textButton::handleEvents(SDL_Event& e) {
     int x, y;
     SDL_PumpEvents();
     SDL_GetMouseState(&x, &y);
-    if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN && active) {
+    if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN && active && visible) {
         if (x > buttonRect.x && x < (buttonRect.x + buttonRect.w) &&
             y > buttonRect.y && y < (buttonRect.y + buttonRect.h)) {
-            hovered = true; 
+            hovered = true;
+            if (hoverAction) {
+                hoverAction();
+            }
         }
         else {
             hovered = false;

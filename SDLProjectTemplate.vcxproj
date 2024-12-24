@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\buttonManager.cpp" />
+    <ClCompile Include="src\editableTextBox.cpp" />
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\imageButton.cpp" />
     <ClCompile Include="src\textButton.cpp" />

@@ -1,6 +1,8 @@
 #include "../include/button.h"
 #include "../include/mainHeader.h"
 
+int imageButton::nextId = 0;
+
 void imageButton::render(SDL_Renderer* renderer) {
     if (!isVisible()) {
         return;
@@ -38,6 +40,10 @@ void imageButton::setAction(std::function<void()> actionFunction) {
     buttonAction = actionFunction;
 }
 
+void imageButton::setHoverAction(std::function<void()> actionFunction) {
+    hoverAction = actionFunction;
+}
+
 bool imageButton::isClicked(int x, int y) {
     return (x > buttonRect.x &&
         x < (buttonRect.x + buttonRect.w) &&
@@ -60,10 +66,13 @@ void imageButton::handleEvents(SDL_Event& e) {
     SDL_PumpEvents();
     SDL_GetMouseState(&x, &y);
 
-    if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN && active) {
+    if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN && active && visible) {
         if (x > buttonRect.x && x < (buttonRect.x + buttonRect.w) &&
             y > buttonRect.y && y < (buttonRect.y + buttonRect.h)) {
             hovered = true;
+            if (hoverAction) {
+                hoverAction();
+            }
         }
         else {
             hovered = false;
