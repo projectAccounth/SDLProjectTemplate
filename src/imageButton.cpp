@@ -8,8 +8,8 @@ void imageButton::render(SDL_Renderer* renderer) {
         return;
     }
 
-    SDL_Surface* imgSurf = IMG_Load(defaultImgPath);
-    SDL_Surface* hoverSurf = IMG_Load(hoverImgPath);
+    SDL_Surface* imgSurf = IMG_Load(defaultImgPath.c_str());
+    SDL_Surface* hoverSurf = IMG_Load(hoverImgPath.c_str());
 
     if (imgSurf == nullptr || hoverSurf == nullptr) {
         std::cout << "A problem occurred when creating one or more surface for image button. Error: " << SDL_GetError() << '\n';
