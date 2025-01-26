@@ -97,8 +97,7 @@ public:
     bool visible, active;
     std::function<void()> hoverAction;
     std::function<void()> buttonAction;
-    const char* defaultImgPath;
-    const char* hoverImgPath;
+    std::string defaultImgPath, hoverImgPath;
 
     imageButton(int x, int y, int w, int h, std::string defaultImageFilePath, std::string hoverImageFilePath)
         : buttonRect{ x, y, w, h },
