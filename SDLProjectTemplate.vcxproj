@@ -75,23 +75,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);./dependencies/SDL2/include;./dependencies/GUILib/include</IncludePath>
+    <LibraryPath>./dependencies/GUILib/lib/x64;./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(LibraryPath)</LibraryPath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SDLLIBS64);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);./dependencies/SDL2/include;./dependencies/GUILib/include</IncludePath>
+    <LibraryPath>./dependencies/GUILib/lib/x64;./dependencies/SDL2/lib/x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(LibraryPath)</LibraryPath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>./dependencies/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(SDLLIBS32);$(LibraryPath);./dependencies/SDL2/lib/x86</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);./dependencies/SDL2/include;./dependencies/GUILib/include</IncludePath>
+    <LibraryPath>$(LibraryPath);./dependencies/SDL2/lib/x86;./dependencies/GUILib/lib/x32</LibraryPath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>./dependencies/SDL2/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SDLINCLUDES)</IncludePath>
-    <LibraryPath>$(SDLLIBS32);$(LibraryPath);./dependencies/SDL2/lib/x86</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);./dependencies/SDL2/include;./dependencies/GUILib/include</IncludePath>
+    <LibraryPath>$(LibraryPath);./dependencies/SDL2/lib/x86;./dependencies/GUILib/lib/x32</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
