@@ -1,9 +1,5 @@
 // C++ SDL2 Template for Visual Studio 2022
 
-#include "../include/mainHeader.h"
-#include "../include/button.h"
-#include "../include/textBox.h"
-#include "../include/buttonManager.h"
 #include "../include/program.h"
 
 int activeButtonId;

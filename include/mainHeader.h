@@ -1,8 +1,8 @@
 #pragma once
 
 // Include guard
-#ifndef MAIN_HDR_H
-#define MAIN_HDR_H
+#ifndef MAINHDR_H
+#define MAINHDR_H
 
 // These are the window width and height, can be changed
 #define WINDOW_WIDTH 640
@@ -16,18 +16,6 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <string>
-#include <cstring>
-#include <cstdlib>
-#include <vector>
-#include <functional>
-#include <variant>
-#include <type_traits>
+#include <lfmain.h>
 
-enum textAlign {
-    LEFT,
-    CENTER,
-    RIGHT
-};
-
-#endif /* MAIN_HDR_H */
+#endif /* MAINHDR_H */
